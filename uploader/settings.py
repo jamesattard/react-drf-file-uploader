@@ -30,11 +30,20 @@ ALLOWED_HOSTS = []
 MEDIA_ROOT = BASE_DIR
 
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'react_jsx/dst'),
+)
+
 # Application definition
 
 PROJECT_APPS=[
     'image',
+    'webpack_loader'
 ]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ] + PROJECT_APPS
 
 MIDDLEWARE_CLASSES = [
@@ -61,7 +71,7 @@ ROOT_URLCONF = 'uploader.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,3 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+    'BUNDLE_DIR_NAME': '',
+    'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json')
+   }
+}
