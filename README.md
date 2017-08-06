@@ -18,7 +18,7 @@
 
 4. The file will be saved as 'xxx.txt'. If you want to maintain the name of the original file replace:
 ```javascript
-file.append('name',files[0])
+file.append('name', files[0])
 ```
 with
 ```javascript
