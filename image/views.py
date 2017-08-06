@@ -1,33 +1,23 @@
 from django.shortcuts import render
 from requests import Response
-from rest_framework import viewsets, renderers
-from rest_framework import status
-from rest_framework.parsers import MultiPartParser
+from rest_framework import viewsets, generics, renderers, status
+from rest_framework.parsers import MultiPartParser, FileUploadParser
 from rest_framework.views import APIView
 from image.serializer import ImageUploaderSerializer
 from image.models import ImageUploader
+
+# Works
+# class ImageUploaderView(generics.ListCreateAPIView):
+#   """List all documents on server and create new"""
+#   queryset = ImageUploader.objects.all()
+#   serializer_class = ImageUploaderSerializer
 
 class ImageUploaderView(viewsets.ModelViewSet):
     renderer_classes = [renderers.JSONRenderer]
     queryset = ImageUploader.objects.all()
     serializer_class = ImageUploaderSerializer
-    parser_classes = (MultiPartParser,)
+    parser_classes = (MultiPartParser,FileUploadParser,)
 
-    # def create(self, request, *args, **kwargs):
-    #     print "request"
-    #     print request.data
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     self.perform_create(serializer)
-    #     print "hey done "
-    #     headers = self.get_success_headers(serializer.data)
-    #     print "hey done 2"
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    # def perform_create(self, serializer):
-    #     serializer.save()
-
-
-
-
-
+    def perform_create(self, serializer):
+        print "Filename: ", self.request.data.get('name')
+        serializer.save()

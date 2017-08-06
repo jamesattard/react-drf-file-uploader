@@ -1,7 +1,7 @@
 {
   "name": "uploader",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. Upload a single image using drag-drop or select on the browser. 2. Uploaded file is copied under media folder under your project.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
